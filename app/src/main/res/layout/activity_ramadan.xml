@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_img"
+    tools:context=".Activity.RamadanActivity">
+
+    <Button
+        android:id="@+id/backBTN"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/back_btn" />
+
+    <ImageView
+        android:id="@+id/dailyImageView"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:src="@drawable/ramadan_ibadat_btn" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dailyImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/title_bg"
+        android:gravity="center"
+        android:text="রমজানের ইবাদত ও ফযিলত"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/text"
+        android:background="@color/header_color" />
+
+    <RelativeLayout
+        android:id="@+id/listviewLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/divider">
+
+        <ListView
+            android:id="@+id/titleListView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            android:divider="@null"
+            android:dividerHeight="10dp" />
+
+        <ListView
+            android:id="@+id/titleListView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="20dp"
+            android:divider="@null"
+            android:dividerHeight="10dp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/nextBTN"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/listviewLayout"
+        android:layout_marginRight="80dp"
+        android:background="@drawable/next_page_btn" />
+
+    <Button
+        android:id="@+id/prevBTN"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/listviewLayout"
+        android:layout_marginLeft="80dp"
+        android:background="@drawable/prv_page_btn" />
+
+</RelativeLayout>

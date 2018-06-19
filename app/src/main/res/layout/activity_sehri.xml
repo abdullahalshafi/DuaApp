@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_img"
+    tools:context=".Activity.SehriActivity">
+
+    <Button
+        android:id="@+id/backBTN"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/back_btn" />
+
+    <ImageView
+        android:id="@+id/dailyImageView"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/shere_ifter_btn" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dailyImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/title_bg"
+        android:gravity="center"
+        android:text="সেহরি ও ইফতার এর সম​য়"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@+id/text"
+        android:background="@color/header_color" />
+
+    <TextView
+        android:id="@+id/ramadanDayType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/divider"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/saheri_time_sub_title"
+        android:gravity="center"
+        android:text="রহমতের ১০ দিন"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ramadanDayType"
+        android:layout_marginBottom="50dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/ramadanSehriIftarTimeWrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <include layout="@layout/ramadan_month_layout" />
+
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/nextBTN"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/ramadanSehriIftarTimeWrapper"
+                android:layout_marginRight="80dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/next_page_btn" />
+
+            <Button
+                android:id="@+id/prevBTN"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/ramadanSehriIftarTimeWrapper"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/prv_page_btn" />
+
+
+            <TextView
+                android:id="@+id/addText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/ramadanSehriIftarAddTime"
+                android:layout_alignRight="@+id/ramadanSehriIftarAddTime"
+                android:layout_below="@+id/prevBTN"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/cell_shape_add_min_bg"
+                android:padding="5dp"
+                android:text="ঢাকা সময় থেকে যোগ করতে হবে"
+                android:textColor="@color/black" />
+
+            <TableLayout
+                android:id="@+id/ramadanSehriIftarAddTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/addText"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_title"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="জেলা"
+                        android:textColor="@color/black" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_title"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="সেহরি"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_title"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="ইফতার"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_bg"
+                        android:padding="5dp"
+                        android:text="খুলনা"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৫ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৭ মিঃ"
+                        android:textColor="@color/black" />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_bg"
+                        android:padding="5dp"
+                        android:text="রংপুর, বগুড়া, পাবনা"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৩ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৬ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_bg"
+                        android:padding="5dp"
+                        android:text="বরিশাল, পটুয়াখালী "
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০২ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৫ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_bg"
+                        android:padding="5dp"
+                        android:text="রাজশাহী, দিনাজপুর "
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৪ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৪ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_bg"
+                        android:padding="5dp"
+                        android:text="ফরিদপুর"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৪ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৪ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_bg"
+                        android:padding="5dp"
+                        android:text="যোশর"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="ম০১ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০১ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_bg"
+                        android:padding="5dp"
+                        android:text="কুষ্টিয়া"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০১ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_add_min_col"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০১ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+            </TableLayout>
+
+
+            <TextView
+                android:id="@+id/subText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/ramadanSehriIftarSubTime"
+                android:layout_alignRight="@+id/ramadanSehriIftarSubTime"
+                android:layout_below="@+id/ramadanSehriIftarAddTime"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/cell_shape_sub_min_bg"
+                android:padding="5dp"
+                android:text="ঢাকার সময় থেকে বিয়োগ করতে হবে"
+                android:textColor="@color/black" />
+
+            <TableLayout
+                android:id="@+id/ramadanSehriIftarSubTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/subText"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_title"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="জেলা"
+                        android:textColor="@color/black" />
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_title"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="সেহরি"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_title"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="ইফতার"
+                        android:textColor="@color/black" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_bg"
+                        android:padding="5dp"
+                        android:text="সিলেট"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৫ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৭ মিঃ"
+                        android:textColor="@color/black" />
+
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_bg"
+                        android:padding="5dp"
+                        android:text="চট্টগ্রাম"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৩ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৬ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_bg"
+                        android:padding="5dp"
+                        android:text="নোয়াখালী"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০২ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৫ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_bg"
+                        android:padding="5dp"
+                        android:text="কুমিল্লা, ফেনী"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৪ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৪ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_bg"
+                        android:padding="5dp"
+                        android:text="বি-বাড়িয়া "
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৪ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০৪ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_bg"
+                        android:padding="5dp"
+                        android:text="ময়মনসিংহ, টাঙ্গাইল"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০১ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০১ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_bg"
+                        android:padding="5dp"
+                        android:text="চাঁদপুর"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০১ মিঃ"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/cell_shape_sub_min_column"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:text="০১ মিঃ"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+            </TableLayout>
+
+
+            <TextView
+                android:id="@+id/iftarirDuaTE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ramadanSehriIftarSubTime"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="ইফতারির দু‘আ"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/iftarirDua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iftarirDuaTE"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="7dp"
+                android:text="উচ্চারণ:আল্লাহুমা লাকা সুমতুওয়া আ‘লা রিযক্বিকা আফত্বারতু
+অর্থ : হে আল্লাহ! আমি আপনার জন্যই রোযা রেখেছি ও আপনার রিয্ক দ্বারাই ইফতার গ্রহণ করছি।"
+                android:textAlignment="textStart"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/sehrirDuaTE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iftarirDua"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="রোজার নিয়ত"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sehrirDuaTE"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="7dp"
+                android:text="উচ্চারণ : (নাওয়াইতু আন আছুমা গাদাম মিন শাহরি রমাজানাল মুবারাকি ফারদাল্লাকা, ইয়া আল্লাহু ফাতাকাব্বাল মিন্নি ইন্নিকা আনতাস সামিউল আলিম।)
+অর্থ: হে আল্লাহ! আগামীকাল পবিত্র রমযান মাসে তোমার পক্ষ হতে ফরয করা রোজা রাখার নিয়ত করলাম, অতএব তুমি আমার পক্ষ হতে কবুল কর, নিশ্চয়ই তুমি সর্বশ্রোতা ও সর্বজ্ঞানী।"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
