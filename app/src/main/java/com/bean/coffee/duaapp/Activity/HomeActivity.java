@@ -94,7 +94,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
         String subscriptionData = SharedPref.read(SharedPref.SUBSCRIPTION_DATA, "");
         if(subscriptionData.equals("SUBSCRIBED")){
 
-        }/*else{
+        }else{
             if(checkConnectivity()){
                 subscriptionDialog = ProgressDialog.show(this, "Please wait.",
                         "Checking subscription..!", true);
@@ -102,7 +102,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
             }else {
                 showNetworkError();
             }
-        }*/
+        }
 
     }
 
@@ -248,7 +248,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
             return false;
     }
 
-
     //check permission
     private  boolean checkPermissions() {
         int result;
@@ -265,8 +264,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
         }
         return true;
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
