@@ -9,15 +9,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -55,55 +54,44 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        dailyDuaIV=findViewById(R.id.dailyImageView);
-        ramadanIV=findViewById(R.id.romjanImageView);
-        sehriIV=findViewById(R.id.sehriImageView);
 
+        initUi();
+        onclickListeners();
 
-
-        dailyDuaIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,DailyDuaActivity.class));
-            }
-        });
-
-        ramadanIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,RamadanActivity.class));
-            }
-        });
-
-        sehriIV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,SehriActivity.class));
-            }
-        });
-
-        homePresenter=new HomePresenterImpl(this,HomeActivity.this);
-
-        SharedPref.init(getApplicationContext());
 
         if (checkPermissions()){
         //  permissions  granted.
 
         }
 
-        String subscriptionData = SharedPref.read(SharedPref.SUBSCRIPTION_DATA, "");
-        if(subscriptionData.equals("SUBSCRIBED")){
+//        String subscriptionData = SharedPref.read(SharedPref.SUBSCRIPTION_DATA, "");
+//        if(subscriptionData.equals("SUBSCRIBED")){
+//
+//        }else{
+//            if(checkConnectivity()){
+//                subscriptionDialog = ProgressDialog.show(this, "Please wait.",
+//                        "Checking subscription..!", true);
+//                homePresenter.subscriberStatusCheck();
+//            }else {
+//                showNetworkError();
+//            }
+//        }
 
-        }else{
-            if(checkConnectivity()){
-                subscriptionDialog = ProgressDialog.show(this, "Please wait.",
-                        "Checking subscription..!", true);
-                homePresenter.subscriberStatusCheck();
-            }else {
-                showNetworkError();
-            }
-        }
+    }
 
+    private void initUi() {
+        dailyDuaIV=findViewById(R.id.dailyImageView);
+        ramadanIV=findViewById(R.id.romjanImageView);
+        sehriIV=findViewById(R.id.sehriImageView);
+
+        homePresenter=new HomePresenterImpl(this,HomeActivity.this);
+        SharedPref.init(getApplicationContext());
+    }
+
+    private void onclickListeners() {
+        dailyDuaIV.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this,DailyDuaActivity.class)));
+        ramadanIV.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this,RamadanActivity.class)));
+        sehriIV.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this,SehriActivity.class)));
     }
 
     public void unsubscribe(View view){
@@ -111,15 +99,9 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         builder.setMessage("Do you really want to unsubscribe?")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        homePresenter.unSubscribe();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> homePresenter.unSubscribe())
+                .setNegativeButton(android.R.string.no, (dialog, which) -> {
 
-                    }
                 })
                 .setCancelable(false)
                 .show();
@@ -133,16 +115,10 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
 
         builder.setTitle("Please subscribe to continue")
                 .setMessage("It will cost you 2 tk per day")
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        homePresenter.pushSubscribeData();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                        System.exit(0);
-                    }
+                .setPositiveButton("OK", (dialog, which) -> homePresenter.pushSubscribeData())
+                .setNegativeButton(android.R.string.no, (dialog, which) -> {
+                    finish();
+                    System.exit(0);
                 })
                 .setCancelable(false)
                 .show();
@@ -197,13 +173,10 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
         progressDialog = ProgressDialog.show(this, "Please wait.",
                 "Authenticating subscription..! \nThis may take a minute", true);
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog.isShowing()) {
+        handler.postDelayed(() -> {
+            if (progressDialog.isShowing()) {
 
-                    homePresenter.subscriberStatusCheck();
-                }
+                homePresenter.subscriberStatusCheck();
             }
         }, 5000);
     }
@@ -223,12 +196,9 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
         builder.setMessage("You are offline please check your internet connection and retry. \nInternet connection is required to" +
                 " check the subscription.")
                 .setTitle("No Internet Connection")
-                .setPositiveButton("Refresh", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                        startActivity(new Intent(HomeActivity.this,HomeActivity.class));
-                    }
+                .setPositiveButton("Refresh", (dialog1, which) -> {
+                    finish();
+                    startActivity(new Intent(HomeActivity.this,HomeActivity.class));
                 });
 
         dialog = builder.create();

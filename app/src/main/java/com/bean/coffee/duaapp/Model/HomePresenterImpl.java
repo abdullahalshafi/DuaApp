@@ -1,14 +1,10 @@
 package com.bean.coffee.duaapp.Model;
 
-import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -20,7 +16,6 @@ import com.android.volley.VolleyError;
 
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import com.bean.coffee.duaapp.Activity.HomeActivity;
 import com.bean.coffee.duaapp.Class.VolleySingleton;
 import com.bean.coffee.duaapp.Presenter.HomePresenter;
 import com.bean.coffee.duaapp.View.HomeView;
@@ -67,12 +62,7 @@ public class HomePresenterImpl implements HomePresenter {
             android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
 
             builder.setMessage("Please allow all the required permissions")
-                    .setPositiveButton("Exit", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            System.exit(0);
-                        }
-                    });
+                    .setPositiveButton("Exit", (dialog1, which) -> System.exit(0));
 
             dialog = builder.create();
             dialog.show();
