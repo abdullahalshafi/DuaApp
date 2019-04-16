@@ -5,12 +5,14 @@ import java.util.List;
 
 public interface DailyDuaView {
 
-    void populateListView1(List<String> titleList);
-    void populateListView2(List<String> titleList);
-    void populateListView3(List<String> titleList);
 
-    void itemClickedCallBack1();
-    void itemClickedCallBack2();
-    void itemClickedCallBack3();
+    void initUi();
+    void onClickListeners();
+
+    void populateListView1(List<String> duaList);
+    void populateListView2(List<String> duaList);
+    void populateListView3(List<String> duaList);
+
+    void itemClickedCallBack();
 
 }

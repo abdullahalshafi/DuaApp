@@ -17,10 +17,12 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bean.coffee.duaapp.Class.SharedPref;
@@ -32,22 +34,22 @@ import com.bean.coffee.duaapp.View.HomeView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity implements HomeView{
+public class HomeActivity extends AppCompatActivity implements HomeView {
 
     //vars
     public static final int MULTIPLE_PERMISSIONS = 10;
     HomePresenter homePresenter;
-    ProgressDialog progressDialog,subscriptionDialog;
+    ProgressDialog progressDialog, subscriptionDialog;
     private static Handler handler = new Handler(Looper.getMainLooper());
 
-    String[] permissions= new String[]{
+    String[] permissions = new String[]{
             Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.SEND_SMS,
             Manifest.permission.INTERNET,
             Manifest.permission.ACCESS_NETWORK_STATE};
 
     //widgets
-    ImageView dailyDuaIV,ramadanIV,sehriIV;
+    LinearLayout dailyDuaLinearLayout, romjanDuaLinearLayout, sehriDuaLinearLayout, todoLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +61,8 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
         onclickListeners();
 
 
-        if (checkPermissions()){
-        //  permissions  granted.
+        if (checkPermissions()) {
+            //  permissions  granted.
 
         }
 
@@ -80,21 +82,23 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
     }
 
     private void initUi() {
-        dailyDuaIV=findViewById(R.id.dailyImageView);
-        ramadanIV=findViewById(R.id.romjanImageView);
-        sehriIV=findViewById(R.id.sehriImageView);
+        dailyDuaLinearLayout = findViewById(R.id.home_daily_dua_linear_layout);
+        romjanDuaLinearLayout = findViewById(R.id.home_romjan_dua_linear_layout);
+        sehriDuaLinearLayout = findViewById(R.id.home_sehri_and_iftar_dua_linear_layout);
+        todoLinearLayout = findViewById(R.id.home_to_do_linear_layout);
 
-        homePresenter=new HomePresenterImpl(this,HomeActivity.this);
+        homePresenter = new HomePresenterImpl(this, HomeActivity.this);
         SharedPref.init(getApplicationContext());
     }
 
     private void onclickListeners() {
-        dailyDuaIV.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this,DailyDuaActivity.class)));
-        ramadanIV.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this,RamadanActivity.class)));
-        sehriIV.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this,SehriActivity.class)));
+        dailyDuaLinearLayout.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, DailyDuaActivity.class)));
+        romjanDuaLinearLayout.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, RamadanActivity.class)));
+        sehriDuaLinearLayout.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, SehriActivity.class)));
+        todoLinearLayout.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, TodoActivity.class)));
     }
 
-    public void unsubscribe(View view){
+    public void unsubscribe(View view) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -109,7 +113,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
     }
 
 
-     private void fireSubscribeDialog() {
+    private void fireSubscribeDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -127,26 +131,26 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
     @Override
     public void subscriberStatusCheck(String status) {
 
-       // Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
+        // Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
 
-        if(status.equals("UNREGISTERED")){
-            if(subscriptionDialog!=null && subscriptionDialog.isShowing()){
+        if (status.equals("UNREGISTERED")) {
+            if (subscriptionDialog != null && subscriptionDialog.isShowing()) {
                 subscriptionDialog.dismiss();
             }
-            if(progressDialog!=null && progressDialog.isShowing()){
+            if (progressDialog != null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
             fireSubscribeDialog();
-        }else if(status.equals("PENDING CHARGE")){
-            if(subscriptionDialog!=null && subscriptionDialog.isShowing()){
+        } else if (status.equals("PENDING CHARGE")) {
+            if (subscriptionDialog != null && subscriptionDialog.isShowing()) {
                 subscriptionDialog.dismiss();
             }
-            if(progressDialog!=null && progressDialog.isShowing()){
+            if (progressDialog != null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
             Toast.makeText(this, "You don't have sufficient balance to subscribe", Toast.LENGTH_SHORT).show();
             fireSubscribeDialog();
-        }else if(status.equals("invalidUser")) {
+        } else if (status.equals("invalidUser")) {
             if (subscriptionDialog != null && subscriptionDialog.isShowing()) {
                 subscriptionDialog.dismiss();
             }
@@ -155,15 +159,14 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
             }
             Toast.makeText(HomeActivity.this, "Subscription was unsuccessful, Please try again", Toast.LENGTH_SHORT).show();
             fireSubscribeDialog();
-        }
-        else if(status.equals("REGISTERED")){
-            if(progressDialog!=null && progressDialog.isShowing()){
+        } else if (status.equals("REGISTERED")) {
+            if (progressDialog != null && progressDialog.isShowing()) {
                 progressDialog.dismiss();
             }
-            if(subscriptionDialog!=null && subscriptionDialog.isShowing()){
+            if (subscriptionDialog != null && subscriptionDialog.isShowing()) {
                 subscriptionDialog.dismiss();
             }
-            SharedPref.write(SharedPref.SUBSCRIPTION_DATA,"SUBSCRIBED");
+            SharedPref.write(SharedPref.SUBSCRIPTION_DATA, "SUBSCRIBED");
         }
     }
 
@@ -183,7 +186,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
 
     @Override
     public void unsubscribeUser() {
-        SharedPref.write(SharedPref.SUBSCRIPTION_DATA,"UNSUBSCRIBED");
+        SharedPref.write(SharedPref.SUBSCRIPTION_DATA, "UNSUBSCRIBED");
         Toast.makeText(this, "Successfully unsubscribed", Toast.LENGTH_SHORT).show();
         fireSubscribeDialog();
     }
@@ -198,7 +201,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
                 .setTitle("No Internet Connection")
                 .setPositiveButton("Refresh", (dialog1, which) -> {
                     finish();
-                    startActivity(new Intent(HomeActivity.this,HomeActivity.class));
+                    startActivity(new Intent(HomeActivity.this, HomeActivity.class));
                 });
 
         dialog = builder.create();
@@ -210,26 +213,25 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        if(activeNetworkInfo!=null) {
+        if (activeNetworkInfo != null) {
             //we are connected to a network
             return true;
-        }
-        else
+        } else
             return false;
     }
 
     //check permission
-    private  boolean checkPermissions() {
+    private boolean checkPermissions() {
         int result;
         List<String> listPermissionsNeeded = new ArrayList<>();
-        for (String p:permissions) {
-            result = ContextCompat.checkSelfPermission(getApplicationContext(),p);
+        for (String p : permissions) {
+            result = ContextCompat.checkSelfPermission(getApplicationContext(), p);
             if (result != PackageManager.PERMISSION_GRANTED) {
                 listPermissionsNeeded.add(p);
             }
         }
         if (!listPermissionsNeeded.isEmpty()) {
-            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]),MULTIPLE_PERMISSIONS );
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), MULTIPLE_PERMISSIONS);
             return false;
         }
         return true;
@@ -239,8 +241,8 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
         switch (requestCode) {
-            case MULTIPLE_PERMISSIONS:{
-                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            case MULTIPLE_PERMISSIONS: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permissions granted.
                 } else {
                     String permission = "";
@@ -248,14 +250,13 @@ public class HomeActivity extends AppCompatActivity implements HomeView{
                         permission += "\n" + per;
                     }
 
-                    Log.d("permissions", "onRequestPermissionsResult: "+permission);
+                    Log.d("permissions", "onRequestPermissionsResult: " + permission);
                     // permissions list of don't granted permission
                 }
                 return;
             }
         }
     }
-
 
 
 }

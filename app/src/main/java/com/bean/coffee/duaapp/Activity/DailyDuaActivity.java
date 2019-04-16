@@ -1,16 +1,15 @@
 package com.bean.coffee.duaapp.Activity;
 
 import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.bean.coffee.duaapp.Class.ListViewAdapter;
+import com.bean.coffee.duaapp.Class.MyCustomListViewAdapter;
 import com.bean.coffee.duaapp.Model.DailyDuaPresenterImpl;
 import com.bean.coffee.duaapp.Presenter.DailyDuaPresenter;
 import com.bean.coffee.duaapp.R;
@@ -22,176 +21,135 @@ import java.util.List;
 public class DailyDuaActivity extends AppCompatActivity implements DailyDuaView {
 
     //vars
-    private List<String> titleList1=new ArrayList<>();
-    private List<String> titleList2=new ArrayList<>();
-    private List<String> titleList3=new ArrayList<>();
-
-    ArrayAdapter<String> titleArrayAdapter1;
-    ArrayAdapter<String> titleArrayAdapter2;
-    ArrayAdapter<String> titleArrayAdapter3;
-
+    private List<String> dailyDuas = new ArrayList<>();
+    MyCustomListViewAdapter dailyDuaAdapter;
     DailyDuaPresenter dailyDuaPresenter;
+    private int btnStatus = 0;
 
     //widgets
-    private ListView titleListView1,titleListView2,titleListView3;
-    private Button nextBTN,prevBTN,backBTN;
+    private ListView dailyDuaLv;
+    private Button nextBtn, prevBtn, backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daily_dua);
 
-        titleListView1=findViewById(R.id.titleListView1);
-        titleListView2=findViewById(R.id.titleListView2);
-        titleListView3=findViewById(R.id.titleListView3);
-        nextBTN=findViewById(R.id.nextBTN);
-        prevBTN=findViewById(R.id.prevBTN);
-        backBTN=findViewById(R.id.backBTN);
+        initUi();
+        onClickListeners();
+    }
 
-        dailyDuaPresenter=new DailyDuaPresenterImpl(DailyDuaActivity.this,this);
+
+    @Override
+    public void initUi() {
+        dailyDuaLv = findViewById(R.id.daily_dua_list_view);
+
+        nextBtn = findViewById(R.id.daily_dua_next_btn);
+        prevBtn = findViewById(R.id.daily_dua_prev_btn);
+        backBtn = findViewById(R.id.daily_dua_back_btn);
+
+        dailyDuaPresenter = new DailyDuaPresenterImpl(DailyDuaActivity.this, this);
+
+        dailyDuaAdapter = new MyCustomListViewAdapter(this, dailyDuas);
+        dailyDuaLv.setAdapter(dailyDuaAdapter);
+
         dailyDuaPresenter.getDataFromDbForListView1();
-        dailyDuaPresenter.getDataFromDbForListView2();
-        dailyDuaPresenter.getDataFromDbForListView3();
+        btnStatus = 1;
+    }
 
+    @Override
+    public void onClickListeners() {
 
-        nextBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        nextBtn.setOnClickListener(v -> {
 
-                if(titleListView1.getVisibility()==View.VISIBLE){
-
-                    titleListView1.setVisibility(View.GONE);
-                    titleListView2.setVisibility(View.VISIBLE);
-
-
-                }
-                else if(titleListView2.getVisibility()==View.VISIBLE) {
-                    titleListView2.setVisibility(View.GONE);
-                    titleListView3.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        prevBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(titleListView3.getVisibility()==View.VISIBLE) {
-                    titleListView3.setVisibility(View.GONE);
-                    titleListView2.setVisibility(View.VISIBLE);
-                }
-                else if(titleListView2.getVisibility()==View.VISIBLE) {
-                    titleListView2.setVisibility(View.GONE);
-                    titleListView1.setVisibility(View.VISIBLE);
+            if (btnStatus >= 1 && btnStatus < 3) {
+                btnStatus++;
+                switch (btnStatus) {
+                    case 2:
+                        dailyDuaPresenter.getDataFromDbForListView2();
+                        break;
+                    case 3:
+                        dailyDuaPresenter.getDataFromDbForListView3();
+                        break;
                 }
             }
+
         });
 
-        backBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
+        prevBtn.setOnClickListener(v -> {
+
+            if (btnStatus > 1 && btnStatus <= 3) {
+                btnStatus--;
+
+                switch (btnStatus) {
+                    case 1:
+                        dailyDuaPresenter.getDataFromDbForListView1();
+                        break;
+                    case 2:
+                        dailyDuaPresenter.getDataFromDbForListView2();
+                        break;
+                }
             }
+
         });
+
+        backBtn.setOnClickListener(v -> onBackPressed());
+
+        itemClickedCallBack();
 
     }
 
-
     @Override
-    public void populateListView1(List<String> titleList) {
-
-        if(titleList!=null) {
-            this.titleList1=titleList;
-            titleArrayAdapter1 =new ListViewAdapter(this,titleList1);
-            titleListView1.setAdapter(titleArrayAdapter1);
-
-        }else{
-            Toast.makeText(this, "Data not found", Toast.LENGTH_SHORT).show();
+    public void populateListView1(List<String> duaList) {
+        dailyDuas.clear();
+        if (duaList.size() > 0) {
+            dailyDuas = new ArrayList<>(duaList);
+            dailyDuaAdapter.updateListData(dailyDuas);
+        } else {
+            Toast.makeText(this, getString(R.string.no_data_found), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    public void populateListView2(List<String> titleList) {
-
-        if(titleList!=null) {
-             this.titleList2=titleList;
-            titleArrayAdapter2 =new ListViewAdapter(this,titleList2);
-            titleListView2.setAdapter(titleArrayAdapter2);
-
-        }else{
-            Toast.makeText(this, "Data not found", Toast.LENGTH_SHORT).show();
+    public void populateListView2(List<String> duaList) {
+        dailyDuas.clear();
+        if (duaList.size() > 0) {
+            dailyDuas = new ArrayList<>(duaList);
+            dailyDuaAdapter.updateListData(dailyDuas);
+        } else {
+            Toast.makeText(this, getString(R.string.no_data_found), Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
-    public void populateListView3(List<String> titleList) {
-
-        if(titleList!=null) {
-            this.titleList3=titleList;
-            titleArrayAdapter3 =new ListViewAdapter(this,titleList3);
-            titleListView3.setAdapter(titleArrayAdapter3);
-
-
-        }else{
-            Toast.makeText(this, "Data not found", Toast.LENGTH_SHORT).show();
+    public void populateListView3(List<String> duaList) {
+        dailyDuas.clear();
+        if (duaList.size() > 0) {
+            dailyDuas = new ArrayList<>(duaList);
+            dailyDuaAdapter.updateListData(dailyDuas);
+        } else {
+            Toast.makeText(this, getString(R.string.no_data_found), Toast.LENGTH_SHORT).show();
         }
     }
+
     @Override
-    public void itemClickedCallBack1() {
+    public void itemClickedCallBack() {
 
-        titleListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        dailyDuaLv.setOnItemClickListener((parent, view, position, id) -> {
 
-                if(titleList1!=null) {
-                    String title = titleList1.get(position);
-                    fireIntent(title);
-                }else{
-                    Toast.makeText(DailyDuaActivity.this, "Data not found", Toast.LENGTH_SHORT).show();
-                }
+            if (dailyDuas != null) {
+                fireIntent(dailyDuas.get(position));
+            } else {
+                Toast.makeText(this, getString(R.string.no_data_found), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    @Override
-    public void itemClickedCallBack2() {
-        titleListView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(titleList2!=null) {
-                    String title = titleList2.get(position);
-                    fireIntent(title);
-                }else{
-                    Toast.makeText(DailyDuaActivity.this, "Data not found", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    @Override
-    public void itemClickedCallBack3() {
-
-        titleListView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(titleList3!=null) {
-                    String title = titleList3.get(position);
-                    fireIntent(title);
-                }else{
-                    Toast.makeText(DailyDuaActivity.this, "Data not found", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
     private void fireIntent(String title) {
         Intent intent = new Intent(DailyDuaActivity.this, DetailsActivity.class);
         intent.putExtra("TITLE_NAME", title);
-        intent.putExtra("TABLE_NAME","dua");
+        intent.putExtra("TABLE_NAME", "dua");
         startActivity(intent);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 }

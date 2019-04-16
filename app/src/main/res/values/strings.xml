@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Ramadan Karim</string>
+    <string name="daily_dua">প্রতিদিনের দোয়াসমূহ</string>
+    <string name="romjan_dua">রমজানের ইবাদত ও ফযিলত</string>
+    <string name="sehri_and_iftar_dua">সেহরি ও ইফতার এর সম​য়</string>
+    <string name="unsubscribe">Unsubscribe</string>
+    <string name="ramadan_ibadat">রমজানের ইবাদত ও ফযিলত</string>
+    <string name="no_data_found">No data found!</string>
 </resources>

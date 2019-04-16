@@ -23,73 +23,79 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1.1">
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:id="@+id/dailyDuaLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp">
+                <LinearLayout
+                    android:id="@+id/home_daily_dua_linear_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/dailyImageView"
                         android:layout_width="80dp"
                         android:layout_height="130dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginBottom="50dp"
-                        android:foreground="?android:attr/selectableItemBackground"
+                        android:layout_gravity="center"
                         android:src="@drawable/daily_dua_btn" />
 
                     <TextView
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentRight="true"
+                        android:layout_marginStart="10dp"
                         android:layout_marginTop="7dp"
-                        android:text="প্রতিদিনের দোয়াসমূহ"
-                        android:textAlignment="center"
+                        android:layout_marginEnd="10dp"
+                        android:gravity="center"
+                        android:text="@string/daily_dua"
                         android:textColor="@color/white"
                         android:textSize="18sp" />
 
-                </RelativeLayout>
+                </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:id="@+id/romjanLayout"
+                <LinearLayout
+                    android:id="@+id/home_romjan_dua_linear_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="30dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:orientation="vertical">
 
                     <ImageView
                         android:id="@+id/romjanImageView"
                         android:layout_width="80dp"
                         android:layout_height="130dp"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
-                        android:layout_marginBottom="50dp"
-                        android:layout_marginLeft="20dp"
-                        android:foreground="?android:attr/selectableItemBackground"
+                        android:layout_gravity="center"
                         android:src="@drawable/ramadan_ibadat_btn" />
 
                     <TextView
-                        android:layout_width="120dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignParentLeft="true"
+                        android:layout_marginStart="7dp"
                         android:layout_marginTop="7dp"
-                        android:text="রমজানের ইবাদত ও ফযিলত"
-                        android:textAlignment="center"
+                        android:layout_marginEnd="7dp"
+                        android:gravity="center"
+                        android:text="@string/romjan_dua"
                         android:textColor="@color/white"
-                        android:textSize="17sp" />
+                        android:textSize="17sp"
+                        android:maxLines="2"/>
 
-                </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
@@ -97,54 +103,101 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-                <RelativeLayout
-                    android:id="@+id/sehriLayout"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/home_sehri_and_iftar_dua_linear_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="top"
+                        android:layout_marginStart="30dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="130dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/shere_ifter_btn" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="10dp"
+                            android:gravity="center"
+                            android:text="@string/sehri_and_iftar_dua"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:maxLines="2"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp">
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/sehriImageView"
-                        android:layout_width="80dp"
-                        android:layout_height="130dp"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="10dp"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:src="@drawable/shere_ifter_btn" />
-
-                    <TextView
-                        android:layout_width="140dp"
+                    <LinearLayout
+                        android:id="@+id/home_to_do_linear_layout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/sehriImageView"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="7dp"
-                        android:text="সেহরি ও ইফতার এর সম​য়"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="17sp"
-                        android:id="@+id/sehriText"/>
+                        android:layout_gravity="top"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="30dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:orientation="vertical">
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        android:text="Unsubscribe"
-                        android:layout_below="@+id/sehriText"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="18dp"
-                        android:textAllCaps="false"
-                        android:onClick="unsubscribe"/>
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="130dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ramadan_ibadat_btn" />
 
-                </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginEnd="20dp"
+                            android:text="To do list"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+
+                    </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:onClick="unsubscribe"
+                android:text="@string/unsubscribe"
+                android:textAllCaps="false" />
 
         </LinearLayout>
     </LinearLayout>

@@ -1,16 +1,15 @@
 package com.bean.coffee.duaapp.Activity;
 
 import android.content.Intent;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.bean.coffee.duaapp.Class.ListViewAdapter;
+import com.bean.coffee.duaapp.Class.MyCustomListViewAdapter;
 import com.bean.coffee.duaapp.Model.RamadanPresenterImpl;
 import com.bean.coffee.duaapp.Presenter.RamadanPresenter;
 import com.bean.coffee.duaapp.R;
@@ -22,131 +21,87 @@ import java.util.List;
 public class RamadanActivity extends AppCompatActivity implements RamadanView {
 
     //vars
-    private List<String> titleList1=new ArrayList<>();
-    private List<String> titleList2=new ArrayList<>();
-
-    ArrayAdapter<String> titleArrayAdapter1;
-    ArrayAdapter<String> titleArrayAdapter2;
+    private List<String> ramadanDuas = new ArrayList<>();
+    MyCustomListViewAdapter ramadanDuaAdapter;
 
     RamadanPresenter ramadanPresenter;
 
     //widgets
-    private ListView titleListView1,titleListView2;
-    private Button nextBTN,prevBTN,backBTN;
+    private ListView ramadanDuaLv;
+    private Button nextBtn, prevBtn, backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ramadan);
+        initUi();
+        onClickListeners();
+    }
 
-        titleListView1=findViewById(R.id.titleListView1);
-        titleListView2=findViewById(R.id.titleListView2);
-        nextBTN=findViewById(R.id.nextBTN);
-        prevBTN=findViewById(R.id.prevBTN);
-        backBTN=findViewById(R.id.backBTN);
+    @Override
+    public void initUi() {
 
-        ramadanPresenter=new RamadanPresenterImpl(this,this);
+        ramadanDuaLv = findViewById(R.id.ramadan_dua_list_view);
+        nextBtn = findViewById(R.id.ramadan_next_btn);
+        prevBtn = findViewById(R.id.ramadan_prev_btn);
+        backBtn = findViewById(R.id.ramadan_back_btn);
+
+        ramadanPresenter = new RamadanPresenterImpl(this, this);
+
+        ramadanDuaAdapter = new MyCustomListViewAdapter(this, ramadanDuas);
+        ramadanDuaLv.setAdapter(ramadanDuaAdapter);
+
         ramadanPresenter.getDataFromDbForListView1();
-        ramadanPresenter.getDataFromDbForListView2();
+    }
 
-        nextBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onClickListeners() {
+        nextBtn.setOnClickListener(v -> ramadanPresenter.getDataFromDbForListView2());
+        prevBtn.setOnClickListener(v -> ramadanPresenter.getDataFromDbForListView1());
+        backBtn.setOnClickListener(v -> onBackPressed());
 
-                if(titleListView1.getVisibility()==View.VISIBLE){
-                    titleListView1.setVisibility(View.GONE);
-                    titleListView2.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        prevBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(titleListView2.getVisibility()==View.VISIBLE) {
-                    titleListView2.setVisibility(View.GONE);
-                    titleListView1.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-
-        backBTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-
+        itemClickedCallBack();
     }
 
     @Override
     public void populateListView1(List<String> titleList) {
-
-        if(titleList!=null) {
-            this.titleList1=titleList;
-            titleArrayAdapter1 =new ListViewAdapter(this,titleList1);
-            titleListView1.setAdapter(titleArrayAdapter1);
-
-        }else{
-            Toast.makeText(this, "Data not found", Toast.LENGTH_SHORT).show();
+        ramadanDuas.clear();
+        if (titleList.size() > 0) {
+            ramadanDuas = new ArrayList<>(titleList);
+            ramadanDuaAdapter.updateListData(ramadanDuas);
+        } else {
+            Toast.makeText(this, getString(R.string.no_data_found), Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void populateListView2(List<String> titleList) {
-
-        if(titleList!=null) {
-            this.titleList2=titleList;
-            titleArrayAdapter2 =new ListViewAdapter(this,titleList2);
-            titleListView2.setAdapter(titleArrayAdapter2);
-
-        }else{
-            Toast.makeText(this, "Data not found", Toast.LENGTH_SHORT).show();
+        ramadanDuas.clear();
+        if (titleList.size() > 0) {
+            ramadanDuas = new ArrayList<>(titleList);
+            ramadanDuaAdapter.updateListData(ramadanDuas);
+        } else {
+            Toast.makeText(this, getString(R.string.no_data_found), Toast.LENGTH_SHORT).show();
         }
+
     }
 
     @Override
-    public void itemClickedCallBack1() {
-        titleListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if(titleList1!=null) {
-                    String title = titleList1.get(position);
-                    fireIntent(title);
-                }else{
-                    Toast.makeText(RamadanActivity.this, "Data not found", Toast.LENGTH_SHORT).show();
-                }
+    public void itemClickedCallBack() {
+        ramadanDuaLv.setOnItemClickListener((parent, view, position, id) -> {
+            if (ramadanDuas.size() > 0) {
+                fireIntent(ramadanDuas.get(position));
+            } else {
+                Toast.makeText(this, getString(R.string.no_data_found), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    @Override
-    public void itemClickedCallBack2() {
-
-        titleListView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(titleList2!=null) {
-                    String title = titleList2.get(position);
-                    fireIntent(title);
-                }else{
-                    Toast.makeText(RamadanActivity.this, "Data not found", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
 
     private void fireIntent(String title) {
         Intent intent = new Intent(RamadanActivity.this, DetailsActivity.class);
         intent.putExtra("TITLE_NAME", title);
-        intent.putExtra("TABLE_NAME","romjan");
+        intent.putExtra("TABLE_NAME", "romjan");
         startActivity(intent);
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
 }
