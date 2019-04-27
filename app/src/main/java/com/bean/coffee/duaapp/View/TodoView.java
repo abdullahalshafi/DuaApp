@@ -1,14 +1,15 @@
 package com.bean.coffee.duaapp.View;
 
+import com.bean.coffee.duaapp.Class.TodoModel;
+
 import java.util.List;
 
-public interface RamadanView {
+public interface TodoView {
 
     void initUi();
     void onClickListeners();
 
-    void populateListView1(List<String> titleList);
-    void populateListView2(List<String> titleList);
+    void populateListView(List<TodoModel> todoModels);
 
     void itemClickedCallBack();
 }

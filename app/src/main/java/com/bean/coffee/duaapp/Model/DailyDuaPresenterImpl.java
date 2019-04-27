@@ -14,69 +14,57 @@ import java.util.List;
 public class DailyDuaPresenterImpl implements DailyDuaPresenter {
 
     private DailyDuaView dailyDuaView;
-    private List<String> titleList1=new ArrayList<>();
-    private List<String> titleList2=new ArrayList<>();
-    private List<String> titleList3=new ArrayList<>();
+    private List<String> dailyDuas = new ArrayList<>();
     private DatabaseHelper myDbHelper;
 
 
-    public DailyDuaPresenterImpl(DailyDuaView dailyDuaView,Context context){
+    public DailyDuaPresenterImpl(DailyDuaView dailyDuaView, Context context) {
 
         this.dailyDuaView = dailyDuaView;
-        SqlConnection sqlConnection=new SqlConnection();
-        myDbHelper=sqlConnection.Connect(context);
+        SqlConnection sqlConnection = new SqlConnection();
+        myDbHelper = sqlConnection.Connect(context);
     }
 
     @Override
     public void getDataFromDbForListView1() {
-        Cursor resultFromDatabase=myDbHelper.getAllTitleData();
-
+        Cursor resultFromDatabase = myDbHelper.getAllTitleData();
+        dailyDuas.clear();
         while (resultFromDatabase.moveToNext()) {
-            String title=resultFromDatabase.getString(0);
-            if(title!=null) {
-                titleList1.add(title);
+            String title = resultFromDatabase.getString(0);
+            if (title != null) {
+                dailyDuas.add(title);
             }
         }
-
-        dailyDuaView.populateListView1(titleList1);
-        if(titleList1!=null) {
-            dailyDuaView.itemClickedCallBack1();
-        }
+        dailyDuaView.populateListView1(dailyDuas);
     }
 
     @Override
     public void getDataFromDbForListView2() {
 
-        Cursor resultFromDatabase=myDbHelper.getAllTitleData1();
-
+        Cursor resultFromDatabase = myDbHelper.getAllTitleData1();
+        dailyDuas.clear();
         while (resultFromDatabase.moveToNext()) {
-            String title=resultFromDatabase.getString(0);
-            if(title!=null) {
-                titleList2.add(title);
+            String title = resultFromDatabase.getString(0);
+            if (title != null) {
+                dailyDuas.add(title);
             }
         }
 
-        dailyDuaView.populateListView2(titleList2);
-        if(titleList2!=null) {
-            dailyDuaView.itemClickedCallBack2();
-        }
+        dailyDuaView.populateListView2(dailyDuas);
     }
 
     @Override
     public void getDataFromDbForListView3() {
 
-        Cursor resultFromDatabase=myDbHelper.getAllTitleData2();
-
+        Cursor resultFromDatabase = myDbHelper.getAllTitleData2();
+        dailyDuas.clear();
         while (resultFromDatabase.moveToNext()) {
-            String title=resultFromDatabase.getString(0);
-            if(title!=null) {
-                titleList3.add(title);
+            String title = resultFromDatabase.getString(0);
+            if (title != null) {
+                dailyDuas.add(title);
             }
         }
+        dailyDuaView.populateListView3(dailyDuas);
 
-        dailyDuaView.populateListView3(titleList3);
-        if(titleList3!=null) {
-            dailyDuaView.itemClickedCallBack3();
-        }
     }
 }

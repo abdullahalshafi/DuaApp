@@ -8,12 +8,12 @@
     tools:context=".Activity.RamadanActivity">
 
     <Button
-        android:id="@+id/backBTN"
+        android:id="@+id/ramadan_back_btn"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="50dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="80dp"
         android:background="@drawable/back_btn" />
 
@@ -34,7 +34,7 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/title_bg"
         android:gravity="center"
-        android:text="রমজানের ইবাদত ও ফযিলত"
+        android:text="@string/ramadan_ibadat"
         android:textColor="@color/white"
         android:textSize="17sp"
         android:textStyle="bold" />
@@ -46,56 +46,38 @@
         android:layout_below="@+id/text"
         android:background="@color/header_color" />
 
-    <RelativeLayout
-        android:id="@+id/listviewLayout"
+    <ListView
+        android:id="@+id/ramadan_dua_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/divider">
-
-        <ListView
-            android:id="@+id/titleListView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="20dp"
-            android:divider="@null"
-            android:dividerHeight="10dp" />
-
-        <ListView
-            android:id="@+id/titleListView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="30dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="20dp"
-            android:divider="@null"
-            android:dividerHeight="10dp"
-            android:visibility="gone" />
-
-    </RelativeLayout>
-
+        android:layout_height="match_parent"
+        android:layout_below="@id/divider"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="10dp"
+        android:divider="@null"
+        android:dividerHeight="10dp"
+        android:layout_above="@+id/ramadan_next_btn"/>
 
     <Button
-        android:id="@+id/nextBTN"
+        android:id="@+id/ramadan_next_btn"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/listviewLayout"
-        android:layout_marginRight="80dp"
-        android:background="@drawable/next_page_btn" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/next_page_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"/>
 
     <Button
-        android:id="@+id/prevBTN"
+        android:id="@+id/ramadan_prev_btn"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/listviewLayout"
-        android:layout_marginLeft="80dp"
-        android:background="@drawable/prv_page_btn" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="80dp"
+        android:background="@drawable/prv_page_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"/>
 
 </RelativeLayout>
