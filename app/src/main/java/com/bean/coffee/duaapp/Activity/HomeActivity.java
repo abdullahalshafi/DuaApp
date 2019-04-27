@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
             Manifest.permission.ACCESS_NETWORK_STATE};
 
     //widgets
-    LinearLayout dailyDuaLinearLayout, romjanDuaLinearLayout, sehriDuaLinearLayout, todoLinearLayout;
+    LinearLayout dailyDuaLinearLayout, romjanDuaLinearLayout, sehriDuaLinearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         dailyDuaLinearLayout = findViewById(R.id.home_daily_dua_linear_layout);
         romjanDuaLinearLayout = findViewById(R.id.home_romjan_dua_linear_layout);
         sehriDuaLinearLayout = findViewById(R.id.home_sehri_and_iftar_dua_linear_layout);
-        todoLinearLayout = findViewById(R.id.home_to_do_linear_layout);
 
         homePresenter = new HomePresenterImpl(this, HomeActivity.this);
         SharedPref.init(getApplicationContext());
@@ -95,7 +94,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView {
         dailyDuaLinearLayout.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, DailyDuaActivity.class)));
         romjanDuaLinearLayout.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, RamadanActivity.class)));
         sehriDuaLinearLayout.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, SehriActivity.class)));
-        todoLinearLayout.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, TodoActivity.class)));
     }
 
     public void unsubscribe(View view) {

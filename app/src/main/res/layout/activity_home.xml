@@ -90,10 +90,10 @@
                         android:layout_marginTop="7dp"
                         android:layout_marginEnd="7dp"
                         android:gravity="center"
+                        android:maxLines="2"
                         android:text="@string/romjan_dua"
                         android:textColor="@color/white"
-                        android:textSize="17sp"
-                        android:maxLines="2"/>
+                        android:textSize="17sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -107,86 +107,32 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
+
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/home_sehri_and_iftar_dua_linear_layout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_gravity="center_horizontal"
+                android:background="?attr/selectableItemBackground"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/shere_ifter_btn" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/home_sehri_and_iftar_dua_linear_layout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="130dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/shere_ifter_btn" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="7dp"
-                            android:layout_marginEnd="10dp"
-                            android:gravity="center"
-                            android:text="@string/sehri_and_iftar_dua"
-                            android:textColor="@color/white"
-                            android:textSize="18sp"
-                            android:maxLines="2"/>
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:id="@+id/home_to_do_linear_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="top"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="30dp"
-                        android:background="?attr/selectableItemBackground"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="80dp"
-                            android:layout_height="130dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ramadan_ibadat_btn" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="7dp"
-                            android:layout_marginEnd="20dp"
-                            android:text="To do list"
-                            android:textColor="@color/white"
-                            android:textSize="18sp" />
-
-                    </LinearLayout>
-                </LinearLayout>
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:text="@string/sehri_and_iftar_dua"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -194,11 +140,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:onClick="unsubscribe"
                 android:text="@string/unsubscribe"
                 android:textAllCaps="false" />
 
         </LinearLayout>
+
     </LinearLayout>
 </LinearLayout>
